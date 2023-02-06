@@ -36,6 +36,11 @@ parameters:
         description: >
             Allows you to specify the no_output_timeout for the rspec test. Defaults to 10m.
         default: "10m"
+    split_by:
+        type: string
+        description: >
+            Allows you to specify the split_by parameter for CircleCI parallel testing. Defaults to "timings".
+        default: "timings"
 steps:
     - run:
         name: <<parameters.label>>
@@ -44,6 +49,7 @@ steps:
             PARAM_INCLUDE: <<parameters.include>>
             PARAM_ORDER: <<parameters.order>>
             PARAM_TAG: <<parameters.tag>>
+            PARAM_SPLIT_BY: <<parameters.split_by>>
         command: <<include(scripts/rspec-test.sh)>>
         no_output_timeout: <<parameters.no_output_timeout>>
         working_directory: <<parameters.app-dir>>

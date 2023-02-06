@@ -22,7 +22,7 @@ readonly old_ifs="$IFS"
 # Split globs per comma and run the CLI split command
 IFS=","
 read -ra globs <<< "$PARAM_INCLUDE"
-split_files=$(circleci tests glob "${globs[@]}" | circleci tests split --split-by=timings)
+split_files=$(circleci tests glob "${globs[@]}" | circleci tests split --split-by=$PARAM_SPLIT_BY)
 
 # Convert list of test files to array
 # This is necessary because the split command returns a list of files separated by newline
